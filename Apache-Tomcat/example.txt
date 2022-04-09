@@ -1,0 +1,18 @@
+FROM tomcat:8.5.63-jdk11 AS tomcatside
+
+# Set up work directory
+WORKDIR /temp
+
+# Copy the entire project to your Docker image
+COPY . .
+
+# Install maven
+RUN apt-get update && \
+    apt install maven -y && \
+    java -version && \
+    mvn -version
+# Build the project
+RUN mvn package
+
+# Deploy the .war file to Tomcat server
+RUN cp -rf ./*.war.war /usr/local/tomcat/webapps
