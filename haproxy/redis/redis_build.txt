@@ -1,0 +1,13 @@
+sudo apt update
+sudo apt install redis-server
+redis-cli ping
+#firewall configuration
+sudo apt-get update
+sudo apt install ufw
+sudo ufw enable
+sudo ufw allow 22
+sudo ufw allow in on eth1 to any port 6379
+sudo ufw allow in on eth1 to any port 26379
+
+#check the ufw status
+ufw status
